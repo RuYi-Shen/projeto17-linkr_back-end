@@ -1,10 +1,14 @@
 import { getUserByEmail, createUser } from "../repositories/userRepositories.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 export async function signUp(req, res){
     const {username, email, password, pictureURL} = req.body;
     try{
-        const existingUsers = getUserByEmail(email)
-        if (existingUsers.rowCount > 0) {
+        const existingUsers = await getUserByEmail(email)
+        if (existingUsers.rows.length > 0) {
             return res.sendStatus(409);
         }
         await createUser(username, email, password, pictureURL);
@@ -15,7 +19,18 @@ export async function signUp(req, res){
 };
 
 export async function signIn (req, res){
-
+    const { email, password } = req.body;
+    const { rows: users } = await getUserByEmail(email);
+    const [user] = users;
+    if (!user) {
+        return res.sendStatus(401); 
+    }
+    if (bcrypt.compareSync(password, user.password)) {
+        const key = process.env.TOKEN_KEY;
+        const token = jwt.sign(user.id, key);
+        return res.send(token);
+    }
+    res.sendStatus(401);
 };
 
 export async function signOut (req, res){
