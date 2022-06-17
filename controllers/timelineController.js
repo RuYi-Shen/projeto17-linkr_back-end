@@ -12,3 +12,13 @@ export async function publishPost(req, res){
         return res.sendStatus(500);
     };
 };
+
+export async function getTimeline(req, res){
+    
+    try{
+        const result = await getPosts();
+        res.status(200).send(result.rows);
+    } catch (error){
+        return res.sendStatus(500);
+    };
+};
