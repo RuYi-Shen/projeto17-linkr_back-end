@@ -1,19 +1,9 @@
-import connection from "../config/database";
+import { tagRepository } from "../repositories/tagsRepositories";
 
 export async function getTagPosts(req, res) {
   const { hashtag } = req.params;
   try {
-    const result = await connection.query(
-      `
-    SELECT *
-    FROM posts
-    JOIN posts_tags
-    ON posts.id = posts_tags."postId"
-    JOIN hashtags
-    ON posts_tags."tagsId" = hashtags.id
-    WHERE hashtags.tag = $1`,
-      [hashtag]
-    );
+    const result = await tagRepository.getPosts(hashtag);
     if (result.rowCount === 0) {
       return res.sendStatus(404);
     }

@@ -1,17 +1,9 @@
-import connection from "../config/database";
+import { tagRepository } from "../repositories/tagsRepositories";
 
 export async function getUserPosts(req, res) {
   const { id } = req.params;
   try {
-    const result = await connection.query(
-      `
-    SELECT *
-    FROM posts
-    JOIN users
-    ON posts."userId" = users.id
-    WHERE users.id = $1`,
-      [id]
-    );
+    const result = await tagRepository.getPosts(id);
     if (result.rowCount === 0) {
       return res.sendStatus(404);
     }
