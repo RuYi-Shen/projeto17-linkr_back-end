@@ -32,7 +32,3 @@ export async function signIn (req, res){
     }
     res.sendStatus(401);
 };
-
-export async function signOut (req, res){
-
-};
