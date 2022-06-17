@@ -1,4 +1,4 @@
-import connection from "../config/database";
+import connection from "../config/database.js";
 
 async function getPosts(hashtag) {
   return connection.query(

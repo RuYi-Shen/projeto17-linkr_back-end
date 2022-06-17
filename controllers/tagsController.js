@@ -1,4 +1,4 @@
-import { tagRepository } from "../repositories/tagsRepositories";
+import { tagRepository } from "../repositories/tagsRepositories.js";
 
 export async function getTagPosts(req, res) {
   const { hashtag } = req.params;
