@@ -3,7 +3,7 @@ import connection from "../config/database.js";
 async function getPosts(hashtag) {
   return connection.query(
     `
-  SELECT *
+  SELECT url, username, "likesCount", "userId", text, "pictureURL"
   FROM posts
   JOIN posts_tags
   ON posts.id = posts_tags."postId"
