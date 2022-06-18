@@ -1,4 +1,4 @@
-import { registerLike } from "../repositories/postRepositories.js";
+import { registerLike, removeLike } from "../repositories/postRepository.js";
 
 
 export async function likePost(req, res){

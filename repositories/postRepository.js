@@ -1,6 +1,6 @@
 import connection from "../config/database.js";
 
-export async function regiterLike(postId, userId) {
+export async function registerLike(postId, userId) {
   return connection.query(
     `
         INSERT INTO likes ("postId", "userId")

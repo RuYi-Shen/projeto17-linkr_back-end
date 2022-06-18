@@ -1,12 +1,12 @@
 import { Router } from "express";
 
-import {validateToken} from "../middlewares/authMiddleware.js";
+import {validateToken} from "../middlewares/validateToken.js";
 import {likePost,dislikePost} from "../controllers/postController.js";
 
 
-const postRouters = Router();
+const postRouter = Router();
 
-postRouters.post("/like/:postId", validateToken, likePost);
-postRouters.post("/dislike/:postId", validateToken, dislikePost);
+postRouter.post("/like/:postId", validateToken, likePost);
+postRouter.post("/dislike/:postId", validateToken, dislikePost);
 
-export default postRouters; 
+export default postRouter; 
