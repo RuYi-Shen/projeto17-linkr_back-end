@@ -7,7 +7,7 @@ export async function getUserPosts(req, res) {
     if (result.rowCount === 0) {
       return res.sendStatus(404);
     }
-    res.status(200).send(result);
+    res.status(200).send(result.rows);
   } catch (e) {
     console.error(e);
     res.status(500).send("Erro de conexão com servidor");
