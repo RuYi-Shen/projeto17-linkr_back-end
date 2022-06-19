@@ -31,9 +31,10 @@ export async function getLikes(postId, userId) {
   );
   const allLikes = await connection.query(
     `
-        SELECT * FROM likes
+        SELECT users.username FROM likes
+        jOIN users ON likes."userId" = users.id
         WHERE "postId" = $1 AND "userId" != $2
-        ORDER BY id DESC
+        ORDER BY likes.id DESC
         LIMIT 2
     `,
     [postId, userId]

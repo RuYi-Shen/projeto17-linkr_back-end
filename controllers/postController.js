@@ -1,4 +1,4 @@
-import { registerLike, removeLike } from "../repositories/postRepository.js";
+import { registerLike, removeLike, getLikes, countLikes } from "../repositories/postRepository.js";
 
 
 export async function likePost(req, res){
@@ -30,12 +30,16 @@ export async function dislikePost(req, res){
 export async function returnLikes(req, res){
     const { postId } = req.params;
     const { userId } = res.locals;
+    let liked = false;
     try{
         const { userLiked, allLikes } = await getLikes(postId, userId);
         const likes = await countLikes(postId);
-        if (userLiked.rows.length === 0) {
-            res.json({ likes: allLikes.rows });
+        if (userLiked.rows.length > 0) {
+            liked = true;
+            allLikes.rows.unshift(userLiked.rows[0]);
         }
+        res.json({ likesUsers: allLikes.rows, liked, likes });
+        
     }
     catch(error){
         console.log(error);
