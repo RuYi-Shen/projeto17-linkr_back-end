@@ -52,3 +52,14 @@ export async function countLikes(postId) {
   );
   return likes.rows[0].count;
 }
+
+
+export async function removePost(postId, userId) {
+  return connection.query(
+    `
+        DELETE FROM posts
+        WHERE "id" = $1 AND "userId" = $2
+    `,
+    [postId, userId]
+  );
+}
