@@ -10,7 +10,7 @@ export async function createPost(url, text, userId) {
 
 export async function getPosts() {
   return connection.query(`
-    SELECT url, username, "likesCount", "userId", text, "pictureURL"
+    SELECT posts.id, url, username, "likesCount", "userId", text, "pictureURL"
     FROM posts
     JOIN users
     ON posts."userId" = users.id
