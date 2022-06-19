@@ -19,3 +19,35 @@ export async function removeLike(postId, userId) {
     [postId, userId]
   );
 }
+
+export async function getLikes(postId, userId) {
+  const userLiked = await connection.query(
+    `
+        SELECT users.username FROM likes
+        jOIN users ON likes."userId" = users.id
+        WHERE likes."postId" = $1 AND likes."userId" = $2
+    `,
+    [postId, userId]
+  );
+  const allLikes = await connection.query(
+    `
+        SELECT * FROM likes
+        WHERE "postId" = $1 AND "userId" != $2
+        ORDER BY id DESC
+        LIMIT 2
+    `,
+    [postId, userId]
+  );
+  return { userLiked, allLikes };
+}
+
+export async function countLikes(postId) {
+  const likes = await connection.query(
+    `
+        SELECT COUNT(*) FROM likes
+        WHERE "postId" = $1
+    `,
+    [postId]
+  );
+  return likes.rows[0].count;
+}
