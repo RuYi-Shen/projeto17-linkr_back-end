@@ -1,4 +1,4 @@
-import { createPost } from "../repositories/timelineRepositories.js";
+import { createPost, getPosts } from "../repositories/timelineRepositories.js";
 
 
 export async function publishPost(req, res){
