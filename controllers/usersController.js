@@ -30,7 +30,8 @@ export async function getUserPic(req, res){
 };
 
 export async function searchUsers(req, res){
-  const search = req.body;
+  const {search} = req.body;
+  console.log(search)
   try {
     const result = await searchUsersLike(search)
     res.send(result.rows)
