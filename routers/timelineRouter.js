@@ -8,6 +8,7 @@ import urlSchema from "../schemas/urlSchema.js";
 const timelineRouter = express.Router();
 
 timelineRouter.post("/post", validateToken, validateSchema(urlSchema), publishPost);
+timelineRouter.put("/post/:postId", validateToken, publishPost);
 timelineRouter.get("/posts", validateToken, getTimeline);
 
 export default timelineRouter; 
