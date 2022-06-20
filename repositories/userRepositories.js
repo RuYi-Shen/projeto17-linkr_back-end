@@ -18,3 +18,13 @@ export async function createUser(username, email, password, pictureURL) {
       [username, email, passwordHash, pictureURL]
     );
 };
+
+export async function getUserPicById(id){
+  return connection.query(
+    `
+  SELECT "pictureURL"
+  FROM users
+  WHERE id = $1`,
+    [id]
+  );
+};
