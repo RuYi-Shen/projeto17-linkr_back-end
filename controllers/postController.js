@@ -1,4 +1,4 @@
-import { registerLike, removeLike, getLikes, countLikes, removePost } from "../repositories/postRepository.js";
+import { registerLike, removeLike, getLikes, countLikes, removePost, removePostLikes } from "../repositories/postRepository.js";
 
 
 export async function likePost(req, res){
@@ -51,6 +51,7 @@ export async function deletePost(req, res){
     const { postId } = req.params;
     const { userId } = res.locals;
     try{
+        await removePostLikes(postId);
         await removePost(postId, userId);
         res.sendStatus(200);
     }

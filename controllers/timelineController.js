@@ -25,6 +25,7 @@ export async function getTimeline(req, res){
         
         res.status(200).send(result.rows);
     } catch (error){
+        console.log(error);
         return res.sendStatus(500);
     };
 };
