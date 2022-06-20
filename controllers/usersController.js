@@ -1,5 +1,5 @@
 import { tagRepository } from "../repositories/tagsRepositories.js";
-import { getUserPicById } from "../repositories/userRepositories.js";
+import { getUserPicById, searchUsersLike } from "../repositories/userRepositories.js";
 
 export async function getUserPosts(req, res) {
   const { id } = req.params;
@@ -28,3 +28,13 @@ export async function getUserPic(req, res){
     res.status(500).send("Erro de conexão com servidor");
   }
 };
+
+export async function searchUsers(req, res){
+  const {search} = req.body;
+  try {
+    const result = await searchUsersLike(search)
+    res.send(result.rows)
+  }catch (e){
+    res.status(500).send("Erro de conexão com servidor");
+  }
+}

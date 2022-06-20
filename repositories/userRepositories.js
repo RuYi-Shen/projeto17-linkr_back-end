@@ -28,3 +28,12 @@ export async function getUserPicById(id){
     [id]
   );
 };
+
+export async function searchUsersLike(search){
+  return connection.query(`
+    SELECT id, username, "pictureURL" 
+    FROM users
+    WHERE username LIKE $1 
+    LIMIT 5 
+  `, [`${search}%`])
+};
