@@ -28,7 +28,7 @@ export async function signIn (req, res){
     if (bcrypt.compareSync(password, user.password)) {
         const key = process.env.TOKEN_KEY;
         const token = jwt.sign(user.id, key);
-        return res.send(token);
+        return res.send({token, userId:user.id});
     }
     res.sendStatus(401);
 };
