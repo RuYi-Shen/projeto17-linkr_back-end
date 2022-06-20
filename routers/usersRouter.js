@@ -6,6 +6,6 @@ const usersRouter = Router();
 
 usersRouter.get("/user/:id", validateToken, getUserPosts);
 usersRouter.get("/userpic", validateToken, getUserPic);
-usersRouter.get("/search-user", validateToken, searchUsers);
+usersRouter.post("/search-user", validateToken, searchUsers);
 
 export default usersRouter;
