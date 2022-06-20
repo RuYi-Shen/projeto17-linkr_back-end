@@ -1,5 +1,5 @@
 import loadMetaDatas from "../repositories/metadataRepository.js";
-import { createPost, getPosts } from "../repositories/timelineRepositories.js";
+import { createPost, getPosts, putPost } from "../repositories/timelineRepositories.js";
 
 
 export async function publishPost(req, res){
@@ -28,3 +28,18 @@ export async function getTimeline(req, res){
         return res.sendStatus(500);
     };
 };
+
+export async function editPost(req, res){
+    const { text } = req.body;
+    const { postId } = req.params;
+    const { userId } = res.locals;
+
+    try{
+        await putPost(text, postId, userId);
+        res.sendStatus(200);
+    }
+    catch(error){
+        console.log(error);
+        res.sendStatus(500);
+    }
+}

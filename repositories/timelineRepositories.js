@@ -18,3 +18,11 @@ export async function getPosts() {
     LIMIT 20
   `);
 }
+
+export async function putPost(text, postId, userId) {
+  return connection.query(`
+    UPDATE posts
+    SET text = $1
+    WHERE id = $2 AND "userId" = $3
+  `, [text, postId, userId]);
+}
