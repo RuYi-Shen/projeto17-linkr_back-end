@@ -13,3 +13,14 @@ export async function getTagPosts(req, res) {
     res.status(500).send("Erro de conexão com servidor");
   }
 }
+
+export async function getTrending(req, res) {
+  try {
+    const { rows: trendingHashtags } = await tagRepository.getTrending();
+
+    res.send(trendingHashtags);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+}
