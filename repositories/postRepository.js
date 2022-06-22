@@ -72,3 +72,12 @@ export async function removePost(postId, userId) {
     [postId, userId]
   );
 }
+
+export async function findPostId(userId){
+  return await db.query(`
+      SELECT * 
+      FROM posts 
+      WHERE "userId"=$1 
+      ORDER BY id 
+      DESC LIMIT 1`,[userId]);
+} 

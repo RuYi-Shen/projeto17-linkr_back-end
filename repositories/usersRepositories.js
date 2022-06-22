@@ -8,7 +8,8 @@ export async function getPosts(id) {
   JOIN users
   ON posts."userId" = users.id
   WHERE users.id = $1
-  ORDER BY posts."createdAt" DESC`,
+  ORDER BY posts."createdAt" DESC
+  LIMIT 20`,
     [id]
   );
 }

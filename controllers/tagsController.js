@@ -1,4 +1,5 @@
 import { getPosts, getTrendings } from "../repositories/tagsRepositories.js";
+import loadMetaDatas from "../repositories/metadataRepository.js";
 
 export async function getTagPosts(req, res) {
   const { hashtag } = req.params;
@@ -7,6 +8,10 @@ export async function getTagPosts(req, res) {
     if (result.rowCount === 0) {
       return res.sendStatus(404);
     }
+    for(let i=0; i<result.rows.length;i++){
+      const infos = await loadMetaDatas(result.rows[i]);
+      result.rows[i] = {...result.rows[i], ...infos}
+  }
     res.status(200).send(result.rows);
   } catch (e) {
     console.error(e);
