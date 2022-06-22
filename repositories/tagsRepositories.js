@@ -24,7 +24,7 @@ export async function insertHashtag(nameHashtag){
 }
 
 export async function verifyHashtag(nameHashtag){
-  const hashtag = connection.query(`
+  const hashtag = await connection.query(`
       SELECT * FROM hashtags WHERE tag = $1
       `, [nameHashtag]);
   return hashtag;
