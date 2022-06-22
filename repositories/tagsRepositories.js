@@ -15,11 +15,11 @@ export async function getPosts(hashtag) {
   );
 }
 
-export async function getTrending() {
+export async function getTrendings() {
   return await db.query(`
     SELECT hashtags.name AS hashtag, COUNT("tagsId") AS frequency FROM "posts_tags" 
-      JOIN hashtags ON "tagsId"=hashtags.id 
-      JOIN posts ON "postId" = posts.id 
+    JOIN hashtags ON "tagsId"=hashtags.id 
+    JOIN posts ON "postId" = posts.id 
     WHERE posts."createdAt" > now() 
     GROUP BY hashtags.name
     ORDER BY frequency DESC

@@ -1,4 +1,4 @@
-import connection from "../config/database";
+import connection from "../config/database.js";
 
 export async function getPosts(id) {
   return connection.query(
