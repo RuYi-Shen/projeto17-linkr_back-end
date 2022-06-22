@@ -32,3 +32,11 @@ CREATE TABLE "posts_tags" (
     "tagsId" INTEGER REFERENCES hashtags(id),
     "postId" INTEGER REFERENCES posts(id)
 );
+
+CREATE TABLE "comments" (
+    "id" SERIAL PRIMARY KEY,
+    "text" TEXT NOT NULL,
+    "postId" INTEGER REFERENCES posts(id),
+    "userId" INTEGER REFERENCES users(id),
+    "createdAt"  TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW() 
+);

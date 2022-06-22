@@ -1,10 +1,10 @@
-import { tagRepository } from "../repositories/tagsRepositories.js";
+import { getPosts } from "../repositories/usersRepositories.js";
 import { getUserPicById, searchUsersLike } from "../repositories/userRepositories.js";
 
 export async function getUserPosts(req, res) {
   const { id } = req.params;
   try {
-    const result = await tagRepository.getPosts(id);
+    const result = await getPosts(id);
     if (result.rowCount === 0) {
       return res.sendStatus(404);
     }

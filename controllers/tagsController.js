@@ -1,9 +1,9 @@
-import { tagRepository } from "../repositories/tagsRepositories.js";
+import { getPosts, getTrending } from "../repositories/tagsRepositories.js";
 
 export async function getTagPosts(req, res) {
   const { hashtag } = req.params;
   try {
-    const result = await tagRepository.getPosts(hashtag);
+    const result = await getPosts(hashtag);
     if (result.rowCount === 0) {
       return res.sendStatus(404);
     }
@@ -16,7 +16,7 @@ export async function getTagPosts(req, res) {
 
 export async function getTrending(req, res) {
   try {
-    const { rows: trendingHashtags } = await tagRepository.getTrending();
+    const { rows: trendingHashtags } = await getTrending();
 
     res.send(trendingHashtags);
   } catch (error) {
