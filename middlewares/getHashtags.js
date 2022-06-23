@@ -1,12 +1,12 @@
 import { insertHashtag, verifyHashtag } from "../repositories/tagsRepositories.js";
 
 export async function addHashtags(req, res, next){
-    const {url, message} = req.body;
+    const {url, text} = req.body;
     
     try {
         const hashtagsArr = [];
-        if(message.length > 0) {
-            const auxArr = message.split(" ");
+        if(text.length > 0) {
+            const auxArr = text.split(" ");
             const auxFilter = auxArr.filter((item) => item.includes("#"));
 
             for(let i = 0; i < auxFilter.length; i++){

@@ -107,12 +107,22 @@ export async function getPostComments(postId) {
   );
 }
 
-export async function deleteComment(postId, userId) {
+export async function deleteComment(id) {
   return connection.query(
     `
         DELETE FROM comments
-        WHERE "postId" = $1 AND "userId" = $2
+        WHERE "id" = $1
     `,
-    [postId, userId]
+    [id]
+  );
+}
+
+export async function totalComments(postId) {
+  return connection.query(
+    `
+        SELECT COUNT(*) FROM comments
+        WHERE "postId" = $1
+    `,
+    [postId]
   );
 }
