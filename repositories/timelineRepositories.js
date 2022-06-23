@@ -8,15 +8,16 @@ export async function createPost(url, text, userId) {
     );
 };
 
-export async function getPosts() {
+export async function getPosts(page) {
   return connection.query(`
     SELECT posts.id, url, username, "likesCount", "userId", text, "pictureURL"
     FROM posts
     JOIN users
     ON posts."userId" = users.id
     ORDER BY posts.id DESC
-    LIMIT 20
-  `);
+    OFFSET $1
+    LIMIT 10
+  `, [page * 10]);
 }
 
 export async function putPost(text, postId, userId) {
