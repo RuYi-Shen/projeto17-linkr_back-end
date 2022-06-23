@@ -25,7 +25,7 @@ export async function publishPost(req, res){
 };
 
 export async function getTimeline(req, res){
-    const page = req.params.page || 1;
+    const page = req.params.page || 0;
     try{
         const result = await getPosts(page);
         for(let i=0; i<result.rows.length;i++){
