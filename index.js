@@ -9,6 +9,7 @@ import postRouter from "./routers/postRouter.js";
 import tagsRouter from "./routers/tagsRouter.js";
 import usersRouter from "./routers/usersRouter.js";
 import timelineRouter from "./routers/timelineRouter.js";
+import followsRouters from "./routers/followsRouter.js"
 
 const app = express();
 app.use(cors());
@@ -18,6 +19,7 @@ app.use(postRouter);
 app.use(tagsRouter);
 app.use(usersRouter);
 app.use(timelineRouter);
+app.use(followsRouters);
 
 let port = process.env.PORT || 4000;
 app.listen(port, () => {
