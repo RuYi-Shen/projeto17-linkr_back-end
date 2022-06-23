@@ -23,10 +23,13 @@ export async function insertHashtag(nameHashtag){
       [nameHashtag]);
 }
 
-export async function verifyHashtag(nameHashtag){
-  const hashtag = await connection.query(`
+export async function verifyHashtag(nameHashtag) {
+  const hashtag = await connection.query(
+    `
       SELECT * FROM hashtags WHERE tag = $1
-      `, [nameHashtag]);
+      `,
+    [nameHashtag]
+  );
   return hashtag;
 }
 
