@@ -11,5 +11,6 @@ const timelineRouter = express.Router();
 timelineRouter.post("/post", validateToken, validateSchema(urlSchema), addHashtags, publishPost);
 timelineRouter.put("/post/:postId", validateToken, addHashtags, editPost);
 timelineRouter.get("/posts", validateToken, getTimeline);
+timelineRouter.get("/posts/:page", validateToken, getTimeline);
 
 export default timelineRouter; 
