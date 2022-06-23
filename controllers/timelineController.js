@@ -6,7 +6,7 @@ import { findPostId } from "../repositories/postRepository.js";
 export async function publishPost(req, res){
     const {url, text} = req.body;
     const { userId } = res.locals;
-    const {hashtags} = res.locals;
+    const { hashtags } = res.locals;
 
     try{
         await createPost(url, text, userId);
@@ -43,7 +43,7 @@ export async function editPost(req, res){
     const { text } = req.body;
     const { postId } = req.params;
     const { userId } = res.locals;
-    const {hashtags} = res.locals;
+    const { hashtags } = res.locals;
 
     try{
         await putPost(text, postId, userId);
