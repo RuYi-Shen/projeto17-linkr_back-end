@@ -49,11 +49,11 @@ export async function deletePostHashtags(postId){
 
 export async function getTrendings() {
   return connection.query(`
-    SELECT hashtags.name AS hashtag, COUNT("tagsId") AS frequency FROM "posts_tags" 
-    JOIN hashtags ON "tagsId"=hashtags.id 
-    JOIN posts ON "postId" = posts.id 
+    SELECT hashtags.tag AS hashtag, COUNT("tagsId") AS frequency FROM "posts_tags" 
+    JOIN hashtags ON posts_tags."tagsId" = hashtags.id 
+    JOIN posts ON posts_tags."postId" = posts.id 
     WHERE posts."createdAt" > now() 
-    GROUP BY hashtags.name
+    GROUP BY hashtags.tag
     ORDER BY frequency DESC
     LIMIT 10
   `);
