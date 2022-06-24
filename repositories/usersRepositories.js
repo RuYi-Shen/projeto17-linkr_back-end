@@ -13,3 +13,13 @@ export async function getPosts(id) {
     [id]
   );
 }
+
+export async function getUserCommentById(id) {
+  return connection.query(
+    `
+  SELECT users.username, users."pictureURL"
+  FROM users
+  WHERE users.id = $1`,
+    [id]
+  );
+}

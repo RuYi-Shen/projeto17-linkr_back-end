@@ -1,4 +1,4 @@
-import { getPosts } from "../repositories/usersRepositories.js";
+import { getPosts, getUserCommentById } from "../repositories/usersRepositories.js";
 import { getUserPicById, searchUsersLike } from "../repositories/userRepositories.js";
 import loadMetaDatas from "../repositories/metadataRepository.js";
 
@@ -44,3 +44,17 @@ export async function searchUsers(req, res){
     res.status(500).send("Erro de conexão com servidor");
   }
 }
+
+export async function getUserComment(req, res){
+  const { id } = req.params;
+  try{
+    const result = await getUserCommentById(id);
+    if (result.rowCount === 0) {
+      return res.sendStatus(404);
+    }
+    res.status(200).send(result.rows);
+  } catch (e){
+    console.error(e);
+    res.status(500).send("Erro de conexão com servidor");
+  }
+};
