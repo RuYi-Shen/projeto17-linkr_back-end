@@ -12,7 +12,7 @@ export async function createPost(url, text, userId) {
 export async function getPosts(page, userId) {
   return connection.query(
     `
-    SELECT posts.id, posts.url, posts."userId", posts.text, users.username, users."pictureURL", reposts.id as "repostId"
+    SELECT posts.id, posts.url, posts."userId", posts.text, users.username, users."pictureURL", reposts."userId" as "repostUser"
     FROM posts
     JOIN follows ON
     follows."followerId" = $1
