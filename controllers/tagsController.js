@@ -21,9 +21,11 @@ export async function getTagPosts(req, res) {
 
 export async function getTrending(req, res) {
   try {
-    const { rows: trendingHashtags } = await getTrendings();
-
-    res.send(trendingHashtags);
+    const result = await getTrendings();
+    if (result.rowCount === 0) {
+      return res.sendStatus(404);
+    }
+    res.send(result.rows);
   } catch (error) {
     console.log(error);
     res.status(500).send(error);

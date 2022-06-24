@@ -3,8 +3,10 @@ import connection from "../config/database.js";
 export async function getPosts(hashtag) {
   return connection.query(
     `
-  SELECT posts.id, url, username, "likesCount", "userId", text, "pictureURL"
+  SELECT posts.id, url, username, "userId", text, "pictureURL"
   FROM posts
+  JOIN users
+  ON posts."userId" = users.id
   JOIN posts_tags
   ON posts.id = posts_tags."postId"
   JOIN hashtags
@@ -52,7 +54,6 @@ export async function getTrendings() {
     SELECT hashtags.tag AS hashtag, COUNT("tagsId") AS frequency FROM "posts_tags" 
     JOIN hashtags ON posts_tags."tagsId" = hashtags.id 
     JOIN posts ON posts_tags."postId" = posts.id 
-    WHERE posts."createdAt" > now() 
     GROUP BY hashtags.tag
     ORDER BY frequency DESC
     LIMIT 10

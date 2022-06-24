@@ -3,7 +3,7 @@ import connection from "../config/database.js";
 export async function getPosts(id) {
   return connection.query(
     `
-  SELECT posts.id, url, username, "likesCount", "userId", text, "pictureURL"
+  SELECT posts.id, url, username, "userId", text, "pictureURL"
   FROM posts
   JOIN users
   ON posts."userId" = users.id
