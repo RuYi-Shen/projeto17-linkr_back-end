@@ -26,8 +26,9 @@ export async function publishPost(req, res){
 
 export async function getTimeline(req, res){
     const page = req.params.page || 0;
+    const { userId } = res.locals;
     try{
-        const result = await getPosts(page);
+        const result = await getPosts(page, userId);
         for(let i=0; i<result.rows.length;i++){
             const infos = await loadMetaDatas(result.rows[i]);
             result.rows[i] = {...result.rows[i], ...infos}
