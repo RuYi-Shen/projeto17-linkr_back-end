@@ -10,6 +10,7 @@ import tagsRouter from "./routers/tagsRouter.js";
 import usersRouter from "./routers/usersRouter.js";
 import timelineRouter from "./routers/timelineRouter.js";
 import followsRouters from "./routers/followsRouter.js"
+import repostRouter from "./routers/repostRouter.js";
 
 const app = express();
 app.use(cors());
@@ -18,6 +19,7 @@ app.use(authRouters);
 app.use(postRouter);
 app.use(tagsRouter);
 app.use(usersRouter);
+app.use(repostRouter);
 app.use(timelineRouter);
 app.use(followsRouters);
 
