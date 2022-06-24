@@ -36,7 +36,7 @@ export async function returnLikes(req, res){
         const likes = await countLikes(postId);
         if (userLiked.rows.length > 0) {
             liked = true;
-            allLikes.rows.unshift(userLiked.rows[0]);
+            allLikes.rows.unshift({username: "Você"});
         }
         res.json({ likesUsers: allLikes.rows, liked, likes });
         
