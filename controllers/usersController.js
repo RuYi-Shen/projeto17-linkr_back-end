@@ -35,10 +35,11 @@ export async function getUserPic(req, res){
 };
 
 export async function searchUsers(req, res){
+  const id = res.locals.userId;
   const {search} = req.body;
   console.log(search)
   try {
-    const result = await searchUsersLike(search)
+    const result = await searchUsersLike(id, search)
     res.send(result.rows)
   }catch (e){
     res.status(500).send("Erro de conexão com servidor");

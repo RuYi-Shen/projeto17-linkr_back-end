@@ -29,11 +29,13 @@ export async function getUserPicById(id){
   );
 };
 
-export async function searchUsersLike(search){
+export async function searchUsersLike(id, search){
   return connection.query(`
-    SELECT id, username, "pictureURL" 
-    FROM users
-    WHERE username LIKE $1 
-    LIMIT 5 
-  `, [`${search}%`])
+    SELECT u.id, u.username, u."pictureURL", CASE WHEN f.id IS NULL THEN false ELSE true END as following
+    FROM users u
+    LEFT JOIN follows f ON f."followerId" = $1 and f."followedId" = u.id
+    WHERE u.username ILIKE $2
+    ORDER BY following DESC
+    LIMIT 5
+  `, [id,`${search}%`])
 };
